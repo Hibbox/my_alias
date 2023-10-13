@@ -1,3 +1,37 @@
+export TZ="Europe/Paris"
+CURRENT_PATH=$(pwd)
+
+# Obtient le nom d'utilisateur (ou nom de la VM)
+USER_OR_VM=$USER
+
+# Obtient le nom de l'hôte
+HOSTNAME=$(hostname -s)
+
+# Obtient l'heure actuelle au format HH:MM:SS
+CURRENT_TIME=$(date +"%T")
+
+# Obtient adresse ip
+IP_ADDRESS=$(hostname -I | cut -d' ' -f1)
+
+# Vérifie si l'utilisateur est root
+if [[ "$USER_OR_VM" == "root" ]]; then
+    # Si l'utilisateur est root, définit la couleur du texte en rouge
+    PROMPT="%F{red}${CURRENT_PATH} %F{white}[${USER_OR_VM}] %F{yellow}[${HOSTNAME}@${IP_ADDRESS}] %F{red}[${CURRENT_TIME}]%f
+->"
+else
+    # Si l'utilisateur n'est pas root, le texte reste en vert par défaut
+    PROMPT="%F{blue}${CURRENT_PATH} %F{white}${USER_OR_VM} %F{yellow}[${HOSTNAME}@${IP_ADDRESS}] %F{red}[${CURRENT_TIME}]%f
+->"
+fi
+
+PS1=$PROMPT
+
+autoload -U colors
+colors
+
+autoload -Uz compinit
+compinit
+
 compile32(){ nasm -f elf32 "$1" -o "${1%.asm}.o"; ld -m elf_i386 "${1%.asm}.o" ;}
 compile64(){ nasm -f elf64 "$1" -o "${1%.asm}.o"; ld "${1%.asm}.o" ;}
 
