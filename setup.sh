@@ -33,9 +33,9 @@ else
 
 fi
 
-mv /home/$USER/my_alias/.* ~.
+mv /home/$USER/my_alias/.* ~/.
 
-source ~.zshrc_perso
+source ~/.zshrc_perso
 rm -rf ~/my_alias
 
 echo " les alias ont bien ete telecharger" 
