@@ -1,0 +1,14 @@
+#map les screen
+set -g prefix C-a
+bind C-a send-prefix
+unbind C-b
+
+set -g history-limit 1000
+set -g allow-rename off
+# join windiws
+bind-key j command-propmt -p "join pame from:" "join-pame -s '%%' "
+bind-key t command-prompt -p "send pane some:" "join-pame -t '%%' " 
+
+#mode vim
+set-windows-option -g mode-keys "vim"
+run-shell /opt/temux-loggin/loggin.tmux
